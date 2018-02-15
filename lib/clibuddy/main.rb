@@ -66,6 +66,7 @@ module CLIBuddy
       t << [p.bold("Error Code "), e.id]
       t << [p.bold("File "), @descriptor_file]
       t << [p.bold("Message "), e.message]
+      t << [p.bold("Cause "), e.cause] if e.cause
       msg = p.bold("Runtime Error\n")
       msg << t.render(:unicode, column_widths: [0, 40],
                       alignments: [:right, :left], multiline: true, resize: true )

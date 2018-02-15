@@ -20,6 +20,7 @@ module CLIBuddy
           super("CLIRUN001", msg)
         end
       end
+
       class NoSuchCommand < EngineRuntimeError
         attr_reader :cmd_name
         def initialize(cmd_name)
@@ -28,9 +29,15 @@ module CLIBuddy
           super("CLIRUN002", msg)
         end
       end
+
+      class OptionParserError < EngineRuntimeError
+        attr_reader :cmd_name
+        def initialize(cmd_name)
+          @cmd_name = cmd_name
+          msg = "I could not parse the arguments you provided to the '#{cmd_name}' definition"
+          super("CLIRUN003", msg)
+        end
+      end
     end
   end
 end
-
-
-

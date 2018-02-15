@@ -159,7 +159,11 @@ module CLIBuddy
         # A: we can do differently-formatted exception handling that makes it clear.
         raise Errors::NoSuchCommand.new(name)
       end
-      InterpretedCommand.new(cmd, provided_args)
+      begin
+        InterpretedCommand.new(cmd, provided_args)
+      rescue OptionParser::ParseError => e
+        raise Errors::OptionParserError.new(cmd.name)
+      end
     end
 
     def lookup_flow
